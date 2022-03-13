@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { Link } from 'react-router-dom'
 
 import logo from './logo.svg'
@@ -6,22 +6,24 @@ import './App.css'
 import { useGrowl, Growl } from './growl'
 
 function App() {
-	const [active, setActive] = useGrowl()
+	const [active, setActive] = useGrowl(10000);
+
+
+	// const [active, setActive] = useGrowl(setTimeout(() => {
+	// 	if (!active) return;
+	// 	setActive(false)
+	// }, 3000));
 
 	return (
 		<div className="App">
 			<header className="App-header">
 				<img src={logo} className="App-logo" alt="logo" />
-				<Link className="App-link" to="/other">
-					Go to the Other component
-        		</Link>
-				<p>
-					Edit <code>src/App.js</code> and save to reload.
-        		</p>
+				<Link className="App-link" to="/other">Go to the Other component</Link>
+				<p>Edit<code>src/App.js</code>and save to reload.</p>
 
-				<a className="App-link" href="#" onClick={() => void setActive(true)}>
+				<a className="App-link" href="#" onClick={() => setActive(true)}>
 					Clik here to activate the growl
-        		</a>
+        </a>
 			</header>
 			<Growl onDismissed={() => setActive(false)} active={active} message="Hello World!" />
 		</div>
